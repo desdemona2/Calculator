@@ -47,11 +47,9 @@ public class MainActivity extends AppCompatActivity {
         binding.btn7.setOnClickListener(this::numberClick);
         binding.btn8.setOnClickListener(this::numberClick);
         binding.btn9.setOnClickListener(this::numberClick);
-        // TODO: Dot can be used only once in a number.
         binding.btnDot.setOnClickListener(this::numberClick);
 
 
-        // TODO: One sign can't be followed by another.
         binding.btnPlus.setOnClickListener(this::additionClick);
         // TODO: A number can start with a minus sign
         binding.btnMinus.setOnClickListener(this::minusClick);
