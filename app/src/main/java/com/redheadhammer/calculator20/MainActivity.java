@@ -145,51 +145,53 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void additionClick(View view) {
-        updateHistory("+");
-
-        operate();
+        if (operator) {
+            updateHistory("+");
+            operate();
+        }
         status = "sum";
     }
 
 
 
     private void minusClick(View view) {
-        updateHistory("-");
-
-        operate();
+        if (operator) {
+            updateHistory("-");
+            operate();
+        }
         status = "minus";
     }
 
     private void multiplyClick(View view) {
-        updateHistory("*");
-
-        operate();
+        if (operator) {
+            updateHistory("*");
+            operate();
+        }
         status = "multiply";
     }
 
     private void divideClick(View view) {
-        updateHistory("/");
-
-        operate();
+        if (operator) {
+            updateHistory("/");
+            operate();
+        }
         status = "divide";
     }
 
     private void operate() {
-        if (operator) {
-            switch (status) {
-                case "multiply":
-                    multiply();
-                    break;
-                case "divide":
-                    divide();
-                    break;
-                case "minus":
-                    minus();
-                    break;
-                default:
-                    addition();
-                    break;
-            }
+        switch (status) {
+            case "multiply":
+                multiply();
+                break;
+            case "divide":
+                divide();
+                break;
+            case "minus":
+                minus();
+                break;
+            default:
+                addition();
+                break;
         }
 
         dot = false;
