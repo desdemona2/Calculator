@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean operator = false;
 
     // to keep the output values decimal formatted
-    private DecimalFormat mFormat = new DecimalFormat("######.######");
+    private final DecimalFormat mFormat = new DecimalFormat("######.######");
 
     // boolean for status of dot
     private boolean dot = false;
@@ -58,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
         binding.btnEqual.setOnClickListener(this::onEqualClick);
         binding.btnAC.setOnClickListener(this::onAcClick);
         binding.btnDEL.setOnClickListener(this::onDelClick);
+
+        // disable delete button at start as there is nothing to delete
+        binding.btnDEL.setEnabled(false);
     }
 
 
@@ -82,15 +85,25 @@ public class MainActivity extends AppCompatActivity {
 
         binding.tvResult.setText(number);
         operator = true;
+
+        binding.btnDEL.setEnabled(true);
     }
 
     private void onDelClick(View view) {
         // COMPLETED: DEL shouldn't be functional if there is no number otherwise app will crash
-        if (number.length() >= 1) {
-            number = number.substring(0, number.length() - 1);
+        if (number != null) {
+            if (number.endsWith(".")) {
+                dot = false;
+            }
+
+            if (number.length() > 1) {
+                number = number.substring(0, number.length() - 1);
+            } else {
+                number = "0";
+                binding.btnDEL.setEnabled(false);
+            }
             binding.tvResult.setText(number);
         }
-
     }
 
     private void onEqualClick(View view) {
