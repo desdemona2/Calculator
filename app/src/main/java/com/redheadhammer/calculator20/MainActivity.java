@@ -28,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
     // boolean for status of dot
     private boolean dot = false;
 
+    // To avoid processing after equal button is pressed
+    private boolean equalState = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,12 +82,21 @@ public class MainActivity extends AppCompatActivity {
 
         if (number == null) {
             number = btnTxt;
-        } else {
+        }
+        else if (equalState)
+        {
+            firstNumber = 0;
+            lastNumber = 0;
+            number = btnTxt;
+            binding.tvHistory.setText("");
+        }
+        else {
             number = number + btnTxt;
         }
 
         binding.tvResult.setText(number);
         operator = true;
+        equalState = false;
 
         binding.btnDEL.setEnabled(true);
     }
@@ -125,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
                     firstNumber = Double.parseDouble(binding.tvResult.getText().toString());
                     break;
             }
+            equalState = true;
         }
 
         operator = false;
