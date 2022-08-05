@@ -174,7 +174,11 @@ public class MainActivity extends AppCompatActivity {
     private void updateHistory(String sign) {
         String history = binding.tvHistory.getText().toString();
         String currentResult = binding.tvResult.getText().toString();
-        binding.tvHistory.setText(String.format("%s%s%s", history, currentResult, sign));
+        binding.tvHistory.setText(String.format("%s%s%s",
+                history,
+                mFormat.format(Double.parseDouble(currentResult)),
+                sign)
+        );
     }
 
     private void addition() {
