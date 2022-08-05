@@ -23,7 +23,10 @@ public class MainActivity extends AppCompatActivity {
     private boolean operator = false;
 
     // to keep the output values decimal formatted
-    DecimalFormat mFormat = new DecimalFormat("######.######");
+    private DecimalFormat mFormat = new DecimalFormat("######.######");
+
+    // boolean for status of dot
+    private boolean dot = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void numberClick(View view) {
         String btnTxt = ((Button) view).getText().toString();
+
+        // Don't do anything if btn pressed is dot and it is already used before
+        if (btnTxt.equals(".") && dot) {
+            return;
+        }
+
+        // If btn pressed is dot set dot to true
+        if (btnTxt.equals(".")) {
+            dot = true;
+        }
 
         if (number == null) {
             number = btnTxt;
@@ -110,8 +123,6 @@ public class MainActivity extends AppCompatActivity {
 
         operate();
         status = "sum";
-        operator = false;
-        number = null;
     }
 
 
@@ -121,8 +132,6 @@ public class MainActivity extends AppCompatActivity {
 
         operate();
         status = "minus";
-        operator = false;
-        number = null;
     }
 
     private void multiplyClick(View view) {
@@ -130,8 +139,6 @@ public class MainActivity extends AppCompatActivity {
 
         operate();
         status = "multiply";
-        operator = false;
-        number = null;
     }
 
     private void divideClick(View view) {
@@ -139,8 +146,6 @@ public class MainActivity extends AppCompatActivity {
 
         operate();
         status = "divide";
-        operator = false;
-        number = null;
     }
 
     private void operate() {
@@ -160,6 +165,10 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
         }
+
+        dot = false;
+        operator = false;
+        number = null;
     }
 
     private void updateHistory(String sign) {
@@ -211,6 +220,7 @@ public class MainActivity extends AppCompatActivity {
     private void onAcClick(View view) {
         number = null;
         status = "";
+        dot = false;
         operator = false;
         firstNumber = 0;
         lastNumber = 0;
